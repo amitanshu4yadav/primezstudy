@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimezStudy — Live class</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="#FFB35A" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFB35A"/></svg>
+    </div>
+    PrimezStudy
+  </div>
+  <div class="topbar-right">
+    <a href="dashboard.html" class="btn-ghost">← All classes</a>
+  </div>
+</div>
+
+<div class="player-shell">
+  <div class="player-top"><a href="dashboard.html">Classes</a>&nbsp;/&nbsp;<span id="class-title-crumb">Live class</span></div>
+
+  <div class="player-grid">
+    <div>
+      <div id="video-wrap" class="video-wrap">
+        <div class="video-placeholder"><span class="dot"></span>Loading class…</div>
+      </div>
+
+      <div class="class-info">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <div>
+            <span id="class-badge" class="badge scheduled">Scheduled</span>
+            <h2 id="class-title" style="margin-top:10px;">&nbsp;</h2>
+            <div class="class-meta">with <span class="instr" id="class-instructor">&nbsp;</span></div>
+          </div>
+          <a id="download-recording" class="btn-ghost" style="display:none; white-space:nowrap;" download>⬇ Download recording</a>
+        </div>
+        <p class="desc" id="class-desc"></p>
+      </div>
+    </div>
+
+    <div class="side-panel-stack">
+      <div class="side-panel">
+        <h4>Session details</h4>
+        <div class="side-row"><span>Starts</span><span id="class-time">—</span></div>
+        <div class="side-row"><span>Duration</span><span id="class-duration">—</span></div>
+        <div class="side-row"><span>Format</span><span>Live only · WebRTC</span></div>
+      </div>
+
+      <aside class="side-panel-dock">
+        <div class="panel-tabs">
+          <button id="tab-chat" class="panel-tab active">Chat</button>
+          <button id="tab-poll" class="panel-tab">Poll</button>
+          <button id="tab-notes" class="panel-tab">Notes</button>
+        </div>
+
+        <div id="chat-panel" class="panel-body">
+          <div id="chat-list" class="chat-list"></div>
+          <form id="chat-form" class="chat-form">
+            <input id="chat-input" type="text" placeholder="Message the class…" autocomplete="off">
+            <button type="submit" class="btn-primary" style="padding:8px 14px;">Send</button>
+          </form>
+        </div>
+
+        <div id="poll-panel" class="panel-body" style="display:none;">
+          <div id="poll-create" class="poll-create" style="display:none;"></div>
+          <div id="poll-live"></div>
+        </div>
+
+        <div id="notes-panel" class="panel-body" style="display:none;">
+          <textarea id="notes-area" class="notes-area" placeholder="The instructor hasn't added notes yet." readonly></textarea>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/webrtc-signal.js"></script>
+<script src="js/side-panel.js"></script>
+<script src="js/player.js"></script>
+</body>
+</html>

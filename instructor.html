@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimezStudy — Instructor</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="#FFB35A" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFB35A"/></svg>
+    </div>
+    PrimezStudy <span style="color:var(--text-muted); font-family:var(--font-mono); font-size:13px; font-weight:500; margin-left:6px;">/ instructor</span>
+  </div>
+  <div class="topbar-right">
+    <a href="dashboard.html" class="btn-ghost">← Classes</a>
+  </div>
+</div>
+
+<div class="page-shell" style="max-width:820px;">
+  <div class="page-head">
+    <div>
+      <h1>Go live</h1>
+      <p>Create a class, then hit <b>Go live</b> to broadcast straight from your camera or screen — no external streaming server needed.</p>
+    </div>
+  </div>
+
+  <div class="side-panel" style="margin-bottom:32px;">
+    <h4>New class</h4>
+    <form id="create-form">
+      <div class="field"><label for="c-title">Title</label><input id="c-title" required placeholder="Intro to Linear Algebra"></div>
+      <div class="field"><label for="c-instructor">Instructor name</label><input id="c-instructor" required placeholder="Dr. Maya Chen"></div>
+      <div class="field"><label for="c-desc">Description</label><input id="c-desc" placeholder="What this session covers"></div>
+      <div class="field"><label for="c-time">Scheduled start</label><input id="c-time" type="datetime-local" required></div>
+      <div class="field"><label for="c-duration">Duration (minutes)</label><input id="c-duration" type="number" value="60" min="5"></div>
+      <button class="btn-primary" type="submit">Create class</button>
+    </form>
+    <div id="create-msg" class="form-msg"></div>
+  </div>
+
+  <div class="section-label">Your classes</div>
+  <div id="manage-list"></div>
+</div>
+
+<template id="row-template">
+  <div class="side-panel" style="margin-bottom:14px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px;">
+      <div>
+        <div class="row-badge"></div>
+        <h3 style="font-family:var(--font-display); font-size:18px; margin:8px 0 2px;" class="row-title"></h3>
+        <div class="class-meta row-meta"></div>
+      </div>
+      <button class="btn-ghost row-delete" type="button">Delete</button>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+      <a class="btn-primary row-studio" href="#" style="flex:1; text-align:center;">Open studio</a>
+      <button class="btn-ghost row-end" type="button" style="flex:1;">End class</button>
+    </div>
+  </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/instructor.js"></script>
+</body>
+</html>

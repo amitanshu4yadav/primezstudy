@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimezStudy — Studio</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="studio-body">
+
+<div class="studio-top">
+  <a href="instructor.html" class="btn-ghost">← Exit studio</a>
+  <div class="studio-title">
+    <span id="studio-class-title">Loading…</span>
+    <span id="studio-live-pill" class="live-pill" style="display:none;">● LIVE <span id="studio-timer">00:00</span></span>
+  </div>
+  <div class="studio-viewers"><span id="viewer-count">0</span> watching</div>
+  <div class="studio-viewers" id="upload-status" style="display:none;"></div>
+</div>
+
+<div class="studio-body-split">
+  <div class="studio-main">
+    <div class="studio-stage-area">
+      <div id="stage-container" class="stage-container">
+        <div id="slide-bar" class="slide-bar">
+          <button id="slide-prev" class="slide-nav-btn" title="Previous slide">‹</button>
+          <span id="slide-indicator">1 / 1</span>
+          <button id="slide-next" class="slide-nav-btn" title="Next slide">›</button>
+          <span class="dock-divider" style="height:18px;"></span>
+          <button id="slide-add" class="slide-nav-btn" title="New slide">+ Slide</button>
+          <button id="slide-delete" class="slide-nav-btn" title="Delete this slide">🗑</button>
+        </div>
+        <canvas id="ink" width="1280" height="720"></canvas>
+        <video id="screen-video" autoplay muted playsinline style="display:none;"></video>
+        <div id="pip" class="pip">
+          <video id="cam-video" autoplay muted playsinline></video>
+          <div class="pip-handle" id="pip-handle"></div>
+        </div>
+        <div id="stage-placeholder" class="stage-placeholder">Turn on your camera to begin, then hit <b>Go live</b></div>
+      </div>
+    </div>
+
+    <div id="thumb-rail" class="thumb-rail"></div>
+
+    <div class="dock">
+      <div class="dock-group">
+        <button id="btn-mic" class="dock-btn" title="Mic">🎤</button>
+        <button id="btn-cam" class="dock-btn" title="Camera">📷</button>
+      </div>
+
+      <div class="dock-group segmented">
+        <button id="src-whiteboard" class="seg-btn active">Whiteboard</button>
+        <button id="src-screen" class="seg-btn">Screen share</button>
+      </div>
+
+      <div class="dock-group" id="pen-tools">
+        <button class="dock-btn tool active" data-tool="pen" title="Pen">✏️</button>
+        <button class="dock-btn tool" data-tool="eraser" title="Eraser">🧽</button>
+        <span class="dock-divider"></span>
+        <button class="dock-btn tool" data-tool="rect" title="Rectangle">▭</button>
+        <button class="dock-btn tool" data-tool="ellipse" title="Ellipse">◯</button>
+        <button class="dock-btn tool" data-tool="line" title="Line">╱</button>
+        <button class="dock-btn tool" data-tool="text" title="Text">T</button>
+        <span class="dock-divider"></span>
+        <div class="swatches">
+          <button class="swatch active" data-color="#ffb35a" style="background:#ffb35a"></button>
+          <button class="swatch" data-color="#ffffff" style="background:#ffffff"></button>
+          <button class="swatch" data-color="#ff5a5a" style="background:#ff5a5a"></button>
+          <button class="swatch" data-color="#6fd08c" style="background:#6fd08c"></button>
+          <button class="swatch" data-color="#5aa9ff" style="background:#5aa9ff"></button>
+          <button class="swatch" data-color="#1a1a1a" style="background:#1a1a1a"></button>
+        </div>
+        <input type="color" id="pen-color" value="#ffb35a" title="Custom color">
+        <input type="range" id="pen-size" min="1" max="30" value="4" title="Brush size">
+        <span class="dock-divider"></span>
+        <button id="btn-undo" class="dock-btn" title="Undo">↶</button>
+        <button id="btn-redo" class="dock-btn" title="Redo">↷</button>
+        <button id="btn-insert-image" class="dock-btn" title="Insert image">🖼️</button>
+        <button id="btn-insert-pdf" class="dock-btn" title="Insert PDF page">📄</button>
+        <input type="file" id="file-input" accept="image/*" style="display:none;">
+        <input type="file" id="pdf-input" accept="application/pdf" style="display:none;">
+        <button id="btn-download-notes" class="dock-btn" title="Download board as image">⬇️</button>
+        <button id="btn-clear" class="dock-btn" title="Clear board">🗑️</button>
+      </div>
+
+      <div class="dock-group">
+        <button id="btn-record" class="dock-btn" title="Record this class">⏺</button>
+        <button id="btn-go-live" class="btn-primary dock-cta">Go live</button>
+        <button id="btn-end" class="btn-danger dock-cta" style="display:none;">End class</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="side-panel-dock">
+    <div class="panel-tabs">
+      <button id="tab-chat" class="panel-tab active">Chat</button>
+      <button id="tab-poll" class="panel-tab">Poll</button>
+      <button id="tab-notes" class="panel-tab">Notes</button>
+    </div>
+
+    <div id="chat-panel" class="panel-body">
+      <div id="chat-list" class="chat-list"></div>
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input" type="text" placeholder="Message the class…" autocomplete="off">
+        <button type="submit" class="btn-primary" style="padding:8px 14px;">Send</button>
+      </form>
+    </div>
+
+    <div id="poll-panel" class="panel-body" style="display:none;">
+      <div id="poll-create" class="poll-create" style="display:none;">
+        <input id="poll-question" type="text" placeholder="Ask a question…">
+        <div id="poll-options-wrap">
+          <input class="poll-option-input" placeholder="Option 1">
+          <input class="poll-option-input" placeholder="Option 2">
+        </div>
+        <button id="poll-add-option" class="btn-ghost" style="width:100%; margin:6px 0;">+ Add option</button>
+        <button id="poll-launch" class="btn-primary" style="width:100%;">Launch poll</button>
+      </div>
+      <div id="poll-live"></div>
+    </div>
+
+    <div id="notes-panel" class="panel-body" style="display:none;">
+      <textarea id="notes-area" class="notes-area" placeholder="Type session notes here — students see them live…"></textarea>
+      <div id="notes-status" class="notes-status">Saved</div>
+    </div>
+  </aside>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/webrtc-signal.js"></script>
+<script src="js/side-panel.js"></script>
+<script src="js/studio.js"></script>
+</body>
+</html>
