@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://primezstudy.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://primezstudy.com/dashboard.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/lectures.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/leaderboard.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/class.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/watch.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/instructor.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/smartboard.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://primezstudy.com/admin.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>

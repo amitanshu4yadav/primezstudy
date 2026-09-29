@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Manage PrimezStudy lectures, classes, and members.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Admin Content Studio | PrimezStudy">
+<meta property="og:description" content="Manage PrimezStudy lectures, classes, and members.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/admin.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Manage PrimezStudy lectures, classes, and members.","url":"https://primezstudy.com/"}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimezStudy — Admin workspace</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="js/staff-guard.js"></script><link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
+</head>
+<body class="product-page admin-page">
+<div class="dashboard-layout">
+  <aside class="app-sidebar">
+    <a class="brand sidebar-brand" href="dashboard.html"><span class="brand-mark"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg></span><span>PrimezStudy</span></a>
+    <div class="sidebar-workspace"><span class="workspace-dot"></span><div><small>Workspace</small><strong>PrimezStudy HQ</strong></div><span class="workspace-chevron">⌄</span></div>
+    <div class="sidebar-label">Operations</div>
+    <nav class="sidebar-nav">
+      <a class="sidebar-link active" href="admin.html"><span class="nav-icon">▦</span>Overview</a>
+      <a class="sidebar-link" href="#" onclick="document.getElementById('tab-classes').click(); return false"><span class="nav-icon">◫</span>Classes<span class="nav-count">12</span></a>
+      <a class="sidebar-link" href="#" onclick="document.getElementById('tab-lectures').click(); return false"><span class="nav-icon">▣</span>Lectures</a>
+      <a class="sidebar-link" href="#" onclick="document.getElementById('tab-users').click(); return false"><span class="nav-icon">♧</span>Members</a>
+    </nav>
+    <div class="sidebar-label sidebar-label-spaced">Shortcuts</div>
+    <nav class="sidebar-nav"><a class="sidebar-link" href="instructor.html"><span class="nav-icon">＋</span>Instructor studio</a><a class="sidebar-link" href="dashboard.html"><span class="nav-icon">↩</span>View student app</a></nav>
+    <div class="sidebar-bottom"><div class="admin-user-chip"><span class="admin-avatar">PS</span><div><strong>Admin account</strong><small>Full access</small></div><span>•••</span></div></div>
+  </aside>
+  <main class="dashboard-main">
+    <header class="topbar app-topbar"><div class="mobile-brand brand"><span class="brand-mark"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg></span>PrimezStudy</div><div class="topbar-context"><span class="status-ping"></span>Admin workspace</div><div class="topbar-right"><a href="dashboard.html" class="btn-ghost">View app ↗</a></div></header>
+    <div class="page-shell admin-shell">
+      <div class="welcome-row admin-welcome"><div><span class="kicker">MONITOR · MANAGE · GROW</span><h1>Good morning, team<span class="title-dot">.</span></h1><p>Keep your classrooms moving and your learners supported.</p></div><button class="btn-primary" onclick="document.getElementById('tab-upload').click()">Upload lecture <span class="button-arrow">↗</span></button></div>
+      <section class="admin-metrics"><article><span class="metric-icon blue">♧</span><div><span class="metric-label">Active members</span><strong>248</strong><small><b class="trend-up">↗ 18.4%</b> vs last month</small></div></article><article><span class="metric-icon purple">◫</span><div><span class="metric-label">Classes this month</span><strong>36</strong><small><b class="trend-up">↗ 8.2%</b> vs last month</small></div></article><article><span class="metric-icon lime">▣</span><div><span class="metric-label">Published lectures</span><strong>124</strong><small><b class="trend-up">↗ 14 new</b> this month</small></div></article><article><span class="metric-icon orange">◷</span><div><span class="metric-label">Avg. attendance</span><strong>86%</strong><small><b class="trend-up">↗ 4.6%</b> vs last month</small></div></article></section>
+      <div class="admin-tabs"><button id="tab-upload" class="panel-tab active"><span>＋</span> Upload lecture</button><button id="tab-lectures" class="panel-tab"><span>▣</span> Manage lectures</button><button id="tab-classes" class="panel-tab"><span>◫</span> Manage classes</button><button id="tab-batches" class="panel-tab"><span>◈</span> Batches</button><button id="tab-users" class="panel-tab"><span>♧</span> Members</button></div>
+      <div id="panel-upload" class="admin-panel admin-content-grid"><div class="side-panel upload-card"><div class="panel-title-row"><div><span class="section-eyebrow">CONTENT LIBRARY</span><h2>Publish a new lecture</h2></div><span class="round-icon">↗</span></div><p class="panel-intro">Upload a recording for students to revisit after class. Add enough context to make it easy to find later.</p><form id="upload-form"><div class="field"><label for="lec-title">Lecture title</label><input id="lec-title" required placeholder="e.g. Electrostatics — Gauss's law"></div><div class="field"><label for="lec-desc">Short description</label><input id="lec-desc" placeholder="What will students learn?"></div><div class="field"><label for="lec-file">Video file <span class="field-or">or</span></label><label class="file-drop" for="lec-file"><span class="upload-cloud">↑</span><strong>Drop your video here</strong><small>MP4, MOV or WebM · up to 2 GB</small><input id="lec-file" type="file" accept="video/*"></label></div><div class="field drive-source-field"><label for="lec-drive-url">Google Drive link <span class="field-or">optional alternative</span></label><input id="lec-drive-url" type="url" placeholder="https://drive.google.com/file/d/.../view"><small class="field-hint">Set the file to “Anyone with the link · Viewer”.</small></div><div id="upload-progress-wrap" class="upload-progress-wrap" style="display:none;"><div class="upload-progress-bar"><div id="upload-progress-fill" class="upload-progress-fill"></div></div><span id="upload-progress-text">0%</span></div><button id="upload-submit" class="btn-primary" type="submit">Publish lecture <span class="button-arrow">↗</span></button></form><div id="upload-msg" class="form-msg"></div></div><aside class="admin-side-summary"><div class="side-panel"><span class="section-eyebrow">LIBRARY HEALTH</span><div class="health-score"><strong>92</strong><span>/ 100</span></div><p>Your library is in great shape. Keep descriptions specific and consistent.</p><div class="health-line"><span style="width:92%"></span></div><div class="health-list"><div><span class="health-dot green"></span>124 published</div><div><span class="health-dot yellow"></span>8 drafts</div><div><span class="health-dot gray"></span>3 missing descriptions</div></div></div><div class="side-panel tip-card"><span class="section-eyebrow">QUICK TIP</span><h3>Make it easy to return.</h3><p>Short, searchable titles help learners find the exact concept they need before exams.</p><a href="lectures.html" class="text-link">View student library ↗</a></div></aside></div>
+      <div id="panel-lectures" class="admin-panel" style="display:none;"><div class="panel-toolbar"><div><span class="section-eyebrow">CONTENT LIBRARY</span><h2>Manage lectures</h2></div><div class="toolbar-search">⌕ <input placeholder="Search lectures" aria-label="Search lectures"></div></div><div id="lectures-manage-list"></div></div>
+      <div id="panel-classes" class="admin-panel" style="display:none;"><div class="panel-toolbar"><div><span class="section-eyebrow">SCHEDULE</span><h2>Manage classes</h2></div><a href="instructor.html" class="btn-primary">Create class <span class="button-arrow">↗</span></a></div><div id="classes-manage-list"></div></div>
+      <div id="panel-batches" class="admin-panel" style="display:none;"><div class="panel-toolbar"><div><span class="section-eyebrow">COHORTS & PAYMENTS</span><h2>Manage batches</h2><p class="panel-intro">Create and publish free or paid batches for students.</p></div></div><div id="batch-manager" data-batch-scope="all"></div></div><div id="panel-users" class="admin-panel" style="display:none;"><div class="panel-toolbar"><div><span class="section-eyebrow">MEMBER DIRECTORY</span><h2>All members</h2><p class="panel-intro">Review learner profiles and activity from your connected workspace.</p></div><div class="toolbar-search">⌕ <input id="user-search" placeholder="Search members" aria-label="Search members"></div></div><div class="member-table"><div class="member-table-head"><span>Member</span><span>Last active</span><span>Role</span><span>Status</span><span></span></div><div id="users-manage-list"><div class="member-row"><div class="member-person"><span class="member-avatar avatar-blue">AK</span><div><strong>Loading member directory…</strong><small>Reading profiles</small></div></div><span class="member-date">—</span><span class="role-chip">Student</span><span class="status-chip online">Active</span><button class="row-more">•••</button></div></div></div></div>
+    </div>
+  </main>
+</div>
+<template id="lecture-row-template"><div class="side-panel admin-row"><div class="admin-row-main"><input class="lec-title-input admin-inline-input" placeholder="Title"><input class="lec-desc-input admin-inline-input" placeholder="Description"></div><div class="admin-row-actions"><a class="btn-ghost lec-watch-link" href="#" target="_blank">Preview</a><button class="btn-primary lec-save-btn" type="button">Save</button><button class="btn-danger lec-delete-btn" type="button">Delete</button></div></div></template>
+<template id="class-row-template"><div class="side-panel admin-row"><div class="admin-row-main"><div class="class-title-static"></div><div class="class-meta-static"></div></div><div class="admin-row-actions"><button class="btn-danger class-delete-btn" type="button">Delete</button></div></div></template>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin.js"></script><script src="js/upload-enhance.js"></script><script src="js/batches.js"></script><script>initBatchManager();</script>
+</body>
+</html>
+<script>
+(() => {
+  const tab = document.getElementById('tab-users');
+  const panel = document.getElementById('panel-users');
+  const list = document.getElementById('users-manage-list');
+  const search = document.getElementById('user-search');
+  const batchTab = document.getElementById('tab-batches');
+  const batchPanel = document.getElementById('panel-batches');
+  if (!tab || !panel || !list) return;
+  batchTab?.addEventListener('click', () => { document.querySelectorAll('.admin-tabs .panel-tab').forEach(button => button.classList.toggle('active', button === batchTab)); ['panel-upload','panel-lectures','panel-classes','panel-users','panel-batches'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display=id==='panel-batches'?'':'none'; }); });
+  let members = [];
+  const avatarClasses = ['avatar-blue','avatar-lilac','avatar-green','avatar-orange'];
+  const initials = (name) => String(name || 'Member').split(' ').map(p => p[0]).join('').slice(0,2).toUpperCase();
+  const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const render = (items) => {
+    if (!items.length) { list.innerHTML = '<div class="member-empty">No member profiles found.</div>'; return; }
+    list.innerHTML = items.map((member, index) => {
+      const name = member.display_name || 'Unnamed learner';
+      const date = member.updated_at ? new Date(member.updated_at).toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) : 'Recently';
+      return `<div class="member-row"><div class="member-person"><span class="member-avatar ${avatarClasses[index % avatarClasses.length]}">${initials(name)}</span><div><strong>${escapeHtml(name)}</strong><small>Profile ID · ${escapeHtml(String(member.id || '').slice(0,8))}</small></div></div><span class="member-date">${date}</span><span class="role-chip">Student</span><span class="status-chip online">Active</span><button class="row-more" type="button" aria-label="More options">•••</button></div>`;
+    }).join('');
+  };
+  const loadUsers = async () => {
+    const { data, error } = await sb.from('profiles').select('*').order('updated_at', { ascending: false });
+    if (error) { list.innerHTML = '<div class="member-empty">Member directory is unavailable for this workspace.</div>'; return; }
+    members = data || []; render(members);
+  };
+  const activateUsers = () => {
+    document.querySelectorAll('.admin-tabs .panel-tab').forEach(button => button.classList.toggle('active', button === tab));
+    ['panel-upload','panel-lectures','panel-classes','panel-users'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = id === 'panel-users' ? '' : 'none'; });
+    loadUsers();
+  };
+  tab.addEventListener('click', activateUsers);
+  search?.addEventListener('input', () => { const query = search.value.toLowerCase().trim(); render(members.filter(member => String(member.display_name || '').toLowerCase().includes(query))); });
+})();
+</script>

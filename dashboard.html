@@ -2,60 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Join live classes, revisit recordings, ask doubts, and track your learning progress with PrimezStudy.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Student Dashboard | PrimezStudy">
+<meta property="og:description" content="Join live classes, revisit recordings, ask doubts, and track your learning progress with PrimezStudy.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/dashboard.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Join live classes, revisit recordings, ask doubts, and track your learning progress with PrimezStudy.","url":"https://primezstudy.com/"}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrimezStudy — Classes</title>
+<title>PrimezStudy — Your classroom</title>
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
 </head>
-<body>
-
-<div class="topbar">
-  <div class="brand">
-    <div class="brand-mark">
-      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="#FFB35A" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFB35A"/></svg>
-    </div>
-    PrimezStudy
-  </div>
-  <div class="topbar-right">
-    <a href="instructor.html" class="btn-ghost">Instructor</a>
-    <div class="user-chip">
-      <img id="user-avatar" src="" alt="">
-      <span id="user-name">&nbsp;</span>
-    </div>
-    <button id="logout-btn" class="btn-ghost">Log out</button>
-  </div>
+<body class="product-page">
+<div class="dashboard-layout">
+  <aside class="app-sidebar"><a class="brand sidebar-brand" href="dashboard.html"><span class="brand-mark"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg></span><span>PrimezStudy</span></a><div class="sidebar-label">Workspace</div><nav class="sidebar-nav"><a class="sidebar-link active" href="dashboard.html"><span class="nav-icon">⌂</span>Overview</a><a class="sidebar-link" href="lectures.html"><span class="nav-icon">▣</span>Lectures<span class="nav-count">12</span></a><a class="sidebar-link" href="leaderboard.html"><span class="nav-icon">↗</span>Leaderboard</a></nav><div class="sidebar-label sidebar-label-spaced">Manage</div><nav class="sidebar-nav"><a class="sidebar-link" href="instructor.html"><span class="nav-icon">＋</span>Instructor studio</a></nav><div class="sidebar-bottom"><div class="sidebar-note"><span class="live-dot"></span><div><strong>Live classes</strong><small>Built for focus</small></div></div></div></aside>
+  <main class="dashboard-main"><header class="topbar app-topbar"><div class="mobile-brand brand"><span class="brand-mark"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg></span>PrimezStudy</div><div class="topbar-context"><span class="status-ping"></span>All systems ready</div><div class="topbar-right"><button class="icon-button" aria-label="Notifications">♢<span class="notification-dot"></span></button><div class="user-chip"><img id="user-avatar" src="" alt=""><span id="user-name">&nbsp;</span></div><button id="logout-btn" class="btn-ghost">Log out</button></div></header><div class="page-shell dashboard-shell"><div class="welcome-row"><div><span class="kicker">TUESDAY, 02 SEPTEMBER 2026</span><h1>Make today count<span class="title-dot">.</span></h1><p>Everything you need for your next breakthrough, in one place.</p></div><div class="home-actions"><a href="camera.html" class="btn-ghost">Camera check</a><a href="lectures.html" class="btn-primary">Browse lectures <span class="button-arrow">↗</span></a></div></div><section class="stats-grid" aria-label="Learning snapshot"><article class="stat-card stat-featured"><div class="stat-top"><span class="stat-label">Learning streak</span><span class="stat-icon">✦</span></div><strong>5 <small>days</small></strong><div class="stat-foot"><span class="trend-up">↗ 12%</span> from last week</div><div class="mini-bars"><i style="height:38%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:72%"></i><i style="height:84%"></i><i style="height:100%"></i><i style="height:68%"></i></div></article><article class="stat-card"><div class="stat-top"><span class="stat-label">Minutes learned</span><span class="stat-icon soft-blue">◷</span></div><strong>248 <small>min</small></strong><div class="stat-foot"><span class="trend-up">↗ 24%</span> this month</div><div class="progress-line"><span style="width:72%"></span></div><div class="progress-caption"><span>Weekly goal</span><b>72%</b></div></article><article class="stat-card"><div class="stat-top"><span class="stat-label">Class rank</span><span class="stat-icon soft-yellow">◇</span></div><strong>#08</strong><div class="stat-foot"><span class="trend-up">↗ 3 places</span> this week</div><div class="rank-avatars"><span>AK</span><span>RJ</span><span>MS</span><b>+18</b></div></article></section><div class="section-heading"><div><span class="section-eyebrow"><span class="live-dot"></span> LIVE NOW</span><h2>Jump into the room</h2></div><span class="section-helper">Updated in real time</span></div><section id="live-section"><div id="live-grid" class="class-grid live-grid"><div class="skeleton"></div><div class="skeleton"></div></div></section><div class="section-heading section-heading-upcoming"><div><span class="section-eyebrow">YOUR SCHEDULE</span><h2>Upcoming classes</h2></div><a href="instructor.html" class="text-link">Manage schedule ↗</a></div><section id="upcoming-section"><div id="upcoming-grid" class="class-grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></section><section id="batch-section" class="batch-section"><div class="section-heading"><div><span class="section-eyebrow">LEARNING PATHS</span><h2>Open batches</h2></div><span class="section-helper">Free and paid cohorts</span></div><div id="batch-catalog" class="batch-grid"><div class="skeleton"></div></div></section><section id="past-section" class="past-wrap"><div class="section-heading"><div><span class="section-eyebrow">KEEP GOING</span><h2>Recently ended</h2></div></div><div id="past-grid" class="class-grid"></div></section></div></main>
 </div>
-
-<div class="page-shell">
-  <div class="page-head">
-    <div>
-      <h1>Your classes</h1>
-      <p>Live sessions only — join while they're happening.</p>
-    </div>
-  </div>
-
-  <div id="live-section">
-    <div class="section-label">Live now</div>
-    <div id="live-grid" class="class-grid">
-      <div class="skeleton"></div><div class="skeleton"></div>
-    </div>
-  </div>
-
-  <div class="section-label">Upcoming</div>
-  <div id="upcoming-grid" class="class-grid">
-    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
-  </div>
-
-  <div id="past-section">
-    <div class="section-label">Recently ended</div>
-    <div id="past-grid" class="class-grid"></div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-client.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-client.js"></script><script src="js/profile-sync.js"></script><script src="js/dashboard.js"></script><script src="js/batches.js"></script><script>initBatchCatalog();</script>
 </body>
 </html>

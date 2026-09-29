@@ -2,19 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Join a PrimezStudy live interactive class with chat, polls, notes, and private doubts.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Live Class | PrimezStudy">
+<meta property="og:description" content="Join a PrimezStudy live interactive class with chat, polls, notes, and private doubts.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/class.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Join a PrimezStudy live interactive class with chat, polls, notes, and private doubts.","url":"https://primezstudy.com/"}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PrimezStudy — Live class</title>
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand">
     <div class="brand-mark">
-      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="#FFB35A" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFB35A"/></svg>
+      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg>
     </div>
     PrimezStudy
   </div>
@@ -56,7 +68,7 @@
       <aside class="side-panel-dock">
         <div class="panel-tabs">
           <button id="tab-chat" class="panel-tab active">Chat</button>
-          <button id="tab-poll" class="panel-tab">Poll</button>
+          <button id="tab-poll" class="panel-tab">Poll</button><button id="tab-doubts" class="panel-tab">Doubts</button>
           <button id="tab-notes" class="panel-tab">Notes</button>
         </div>
 
@@ -73,7 +85,13 @@
           <div id="poll-live"></div>
         </div>
 
-        <div id="notes-panel" class="panel-body" style="display:none;">
+        <div id="doubts-panel" class="panel-body" style="display:none;">
+      <div class="doubt-intro"><span class="doubt-lock">✦</span><div><strong>Private doubt room</strong><small>Ask the instructor directly. Only your thread is visible to you.</small></div></div>
+      <button id="request-call" class="btn-ghost request-call-btn" type="button">Need face-to-face help? Request a private video call ↗</button><form id="doubt-form" class="doubt-form"><textarea id="doubt-input" placeholder="What are you stuck on?" rows="3" required></textarea><div class="doubt-form-actions"><button id="doubt-record" class="btn-ghost" type="button">● Add video</button><button class="btn-primary" type="submit">Send doubt ↗</button></div><video id="doubt-preview" class="doubt-preview" autoplay muted playsinline style="display:none;"></video></form>
+      <div id="doubt-list" class="doubt-list"></div>
+    </div>
+
+    <div id="notes-panel" class="panel-body" style="display:none;">
           <textarea id="notes-area" class="notes-area" placeholder="The instructor hasn't added notes yet." readonly></textarea>
         </div>
       </aside>
@@ -82,9 +100,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-client.js"></script>
+<script src="js/supabase-client.js"></script><script src="js/fullscreen.js"></script>
 <script src="js/webrtc-signal.js"></script>
-<script src="js/side-panel.js"></script>
+<script src="js/side-panel.js"></script><script src="js/doubts.js"></script><script src="js/notifications.js"></script><script src="js/student-call-request.js"></script>
 <script src="js/player.js"></script>
 </body>
 </html>

@@ -142,7 +142,118 @@ do $$ begin
   alter publication supabase_realtime add table public.poll_votes;
 exception when duplicate_object then null; end $$;
 
--- 4. Seed one example row
+-- 7. Recorded lecture videos (separate from live classes) -----------
+create table if not exists public.lectures (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text,
+  video_url text not null,
+  uploaded_by text,
+  duration_seconds int,
+  created_at timestamptz not null default now()
+);
+alter table public.lectures enable row level security;
+
+drop policy if exists "Authenticated users can read lectures" on public.lectures;
+create policy "Authenticated users can read lectures"
+  on public.lectures for select to authenticated using (true);
+drop policy if exists "Authenticated users can manage lectures" on public.lectures;
+create policy "Authenticated users can manage lectures"
+  on public.lectures for all to authenticated using (true) with check (true);
+
+insert into storage.buckets (id, name, public)
+values ('lecture-videos', 'lecture-videos', true)
+on conflict (id) do nothing;
+
+drop policy if exists "Authenticated users can upload lectures" on storage.objects;
+create policy "Authenticated users can upload lectures"
+  on storage.objects for insert to authenticated with check (bucket_id = 'lecture-videos');
+drop policy if exists "Anyone can view lecture videos" on storage.objects;
+create policy "Anyone can view lecture videos"
+  on storage.objects for select using (bucket_id = 'lecture-videos');
+drop policy if exists "Authenticated users can delete lectures" on storage.objects;
+create policy "Authenticated users can delete lectures"
+  on storage.objects for delete to authenticated using (bucket_id = 'lecture-videos');
+
+do $$ begin
+  alter publication supabase_realtime add table public.lectures;
+exception when duplicate_object then null; end $$;
+do $$ begin
+  alter publication supabase_realtime add table public.lecture_progress;
+exception when duplicate_object then null; end $$;
+
+
 insert into public.classes (title, instructor, description, scheduled_at, duration_minutes, status, stream_url)
 values
   ('Welcome Session', 'Your name here', 'Edit or delete this from instructor.html — then create your real class.', now() + interval '1 hour', 60, 'scheduled', null);
+
+-- 7. Leaderboard ------------------------------------------------------
+-- Profiles let us attribute watch-time XP to a name (lecture_progress is
+-- keyed by auth user id, not a free-text name like chat messages use).
+create table if not exists public.profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  display_name text,
+  updated_at timestamptz not null default now()
+);
+alter table public.profiles enable row level security;
+
+drop policy if exists "Anyone can read profiles" on public.profiles;
+create policy "Anyone can read profiles"
+  on public.profiles for select to authenticated using (true);
+drop policy if exists "Users can insert their own profile" on public.profiles;
+create policy "Users can insert their own profile"
+  on public.profiles for insert to authenticated with check (auth.uid() = id);
+drop policy if exists "Users can update their own profile" on public.profiles;
+create policy "Users can update their own profile"
+  on public.profiles for update to authenticated using (auth.uid() = id) with check (auth.uid() = id);
+
+-- Tracks the furthest point each user has watched into each lecture, in
+-- seconds. XP = 2 points per full minute watched (see the view below).
+create table if not exists public.lecture_progress (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  lecture_id uuid not null references public.lectures(id) on delete cascade,
+  seconds_watched int not null default 0,
+  updated_at timestamptz not null default now(),
+  unique (user_id, lecture_id)
+);
+alter table public.lecture_progress enable row level security;
+
+drop policy if exists "Authenticated users can read progress" on public.lecture_progress;
+create policy "Authenticated users can read progress"
+  on public.lecture_progress for select to authenticated using (true);
+drop policy if exists "Users can insert their own progress" on public.lecture_progress;
+create policy "Users can insert their own progress"
+  on public.lecture_progress for insert to authenticated with check (auth.uid() = user_id);
+drop policy if exists "Users can update their own progress" on public.lecture_progress;
+create policy "Users can update their own progress"
+  on public.lecture_progress for update to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+-- XP = (2 points per full minute watched, summed across all lectures)
+--    + (1 point per chat message sent, kept as a small participation bonus).
+-- Ranked highest XP first. The leaderboard page itself requires the
+-- viewing user to have at least 2 XP (i.e. at least 1 minute watched) to
+-- unlock — that gate is enforced client-side in leaderboard.js.
+create or replace view public.leaderboard as
+with chat as (
+  select sender_name as name, count(*)::int as chat_points
+  from public.messages
+  group by sender_name
+),
+watch as (
+  select p.display_name as name,
+         coalesce(sum(floor(lp.seconds_watched / 60.0)), 0)::int * 2 as watch_points
+  from public.lecture_progress lp
+  join public.profiles p on p.id = lp.user_id
+  group by p.display_name
+)
+select
+  coalesce(chat.name, watch.name) as name,
+  coalesce(watch.watch_points, 0) as watch_points,
+  coalesce(chat.chat_points, 0) as chat_points,
+  coalesce(watch.watch_points, 0) + coalesce(chat.chat_points, 0) as points
+from chat
+full outer join watch on chat.name = watch.name
+order by points desc;
+
+grant select on public.leaderboard to authenticated;

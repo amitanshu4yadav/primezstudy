@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Search and watch PrimezStudy recorded lectures on demand.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Recorded Lectures | PrimezStudy">
+<meta property="og:description" content="Search and watch PrimezStudy recorded lectures on demand.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/lectures.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Search and watch PrimezStudy recorded lectures on demand.","url":"https://primezstudy.com/"}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimezStudy — Lectures</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg></div>
+    PrimezStudy
+  </div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html">Live classes</a>
+    <a href="lectures.html" class="nav-active">Lectures</a>
+    <a href="leaderboard.html">Leaderboard</a>
+  </nav>
+  <div class="topbar-right">
+    <a href="dashboard.html" class="btn-ghost">← Dashboard</a>
+  </div>
+</div>
+
+<div class="page-shell">
+  <div class="page-head">
+    <div>
+      <h1>Recorded lectures</h1>
+      <p>Replay every important concept, whenever your study plan needs it.</p>
+    </div>
+  <div class="library-toolbar"><span class="library-count">ON-DEMAND LIBRARY</span><label class="toolbar-search lecture-search">⌕ <input id="lecture-search" placeholder="Search by topic or instructor" aria-label="Search recorded lectures"></label></div>
+  </div>
+
+  <div id="lecture-grid" class="class-grid">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/lectures.js"></script>
+</body>
+</html>

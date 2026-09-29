@@ -82,3 +82,12 @@ Open `index.html`. Sign up / log in, then:
 - RLS lets any signed-in user manage classes for now (simple single/small
   team instructor setup) — see the comment in `schema.sql` for how to
   lock that down to specific instructor accounts later.
+
+
+## Batches and payments
+
+- `dashboard.html` shows published free and paid batches.
+- `instructor.html` includes batch creation for drafts, free cohorts, and paid cohorts.
+- `admin.html` includes a Batches tab for managing all batch records.
+- Run `primezstudy-batches-payments.sql` once in Supabase before using these screens.
+- Razorpay Checkout is wired to test mode. The browser stores only the test publishable key; never place the Razorpay secret in client code. See `RAZORPAY_SETUP.md` for server-side verification requirements.

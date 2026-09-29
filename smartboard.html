@@ -2,12 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Teach live with PrimezStudy smartboard, screen share, camera, notes, and polls.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Smartboard Studio | PrimezStudy">
+<meta property="og:description" content="Teach live with PrimezStudy smartboard, screen share, camera, notes, and polls.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/smartboard.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Teach live with PrimezStudy smartboard, screen share, camera, notes, and polls.","url":"https://primezstudy.com/"}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PrimezStudy — Studio</title>
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700" rel="stylesheet">
+<script src="js/staff-guard.js"></script><link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
 </head>
 <body class="studio-body">
 
@@ -32,6 +44,11 @@
           <span class="dock-divider" style="height:18px;"></span>
           <button id="slide-add" class="slide-nav-btn" title="New slide">+ Slide</button>
           <button id="slide-delete" class="slide-nav-btn" title="Delete this slide">🗑</button>
+          <span class="dock-divider" style="height:18px;"></span>
+          <button id="zoom-out" class="slide-nav-btn" title="Zoom out">−</button>
+          <span id="zoom-label">100%</span>
+          <button id="zoom-in" class="slide-nav-btn" title="Zoom in">+</button>
+          <button id="zoom-reset" class="slide-nav-btn" title="Reset zoom">⟲</button>
         </div>
         <canvas id="ink" width="1280" height="720"></canvas>
         <video id="screen-video" autoplay muted playsinline style="display:none;"></video>
@@ -48,17 +65,19 @@
     <div class="dock">
       <div class="dock-group">
         <button id="btn-mic" class="dock-btn" title="Mic">🎤</button>
-        <button id="btn-cam" class="dock-btn" title="Camera">📷</button>
+        <button id="btn-cam" class="dock-btn" title="Camera">📷</button><select id="camera-source" class="camera-source" aria-label="Camera source"><option value="">Choose camera source</option></select><span id="obs-device-badge" class="obs-device-badge" hidden>OBS ready</span><button id="camera-refresh" class="dock-btn camera-refresh" type="button" title="Refresh camera list">↻</button><button id="obs-guide" class="dock-btn obs-guide" type="button">OBS guide</button><button id="btn-phone-camera" class="dock-btn" title="Connect phone camera">📱+</button><button id="btn-student-call" class="dock-btn" title="Call a student privately">☎</button>
       </div>
 
       <div class="dock-group segmented">
-        <button id="src-whiteboard" class="seg-btn active">Whiteboard</button>
-        <button id="src-screen" class="seg-btn">Screen share</button>
+        <button id="src-whiteboard" class="seg-btn active">Board + camera</button>
+        <button id="src-camera" class="seg-btn">Camera only</button>
+        <button id="src-screen" class="seg-btn">Screen only</button><select id="screen-audio-mode" class="screen-audio-mode" aria-label="Screen share audio"><option value="mic">Mic audio</option><option value="system">System sound</option><option value="both">System + mic</option><option value="none">No audio</option></select>
       </div>
 
       <div class="dock-group" id="pen-tools">
         <button class="dock-btn tool active" data-tool="pen" title="Pen">✏️</button>
         <button class="dock-btn tool" data-tool="eraser" title="Eraser">🧽</button>
+        <button class="dock-btn tool" data-tool="pan" title="Pan (drag to move around when zoomed in)">✋</button>
         <span class="dock-divider"></span>
         <button class="dock-btn tool" data-tool="rect" title="Rectangle">▭</button>
         <button class="dock-btn tool" data-tool="ellipse" title="Ellipse">◯</button>
@@ -93,11 +112,12 @@
       </div>
     </div>
   </div>
+  <div id="phone-camera-modal" class="phone-camera-modal" style="display:none;"><div class="phone-camera-dialog"><button id="phone-camera-close" class="phone-camera-close" type="button">×</button><span class="section-eyebrow">SECOND CAMERA</span><h3>Connect your phone camera</h3><p>Scan this QR with your phone. Keep the camera page open to send a live view into this studio.</p><div id="phone-camera-qr" class="phone-camera-qr"></div><a id="phone-camera-link" class="phone-camera-link" target="_blank"></a><div id="phone-camera-state" class="phone-camera-state">Waiting…</div></div></div>
 
   <aside class="side-panel-dock">
     <div class="panel-tabs">
       <button id="tab-chat" class="panel-tab active">Chat</button>
-      <button id="tab-poll" class="panel-tab">Poll</button>
+      <button id="tab-poll" class="panel-tab">Poll</button><button id="tab-doubts" class="panel-tab">Doubts</button>
       <button id="tab-notes" class="panel-tab">Notes</button>
     </div>
 
@@ -122,8 +142,14 @@
       <div id="poll-live"></div>
     </div>
 
+    <div id="doubts-panel" class="panel-body" style="display:none;">
+      <div class="doubt-intro"><span class="doubt-lock">✦</span><div><strong>Private doubt room</strong><small>Ask the instructor directly. Only your thread is visible to you.</small></div></div>
+      <form id="doubt-form" class="doubt-form"><textarea id="doubt-input" placeholder="What are you stuck on?" rows="3" required></textarea><div class="doubt-form-actions"><button id="doubt-record" class="btn-ghost" type="button">● Add video</button><button class="btn-primary" type="submit">Send doubt ↗</button></div><video id="doubt-preview" class="doubt-preview" autoplay muted playsinline style="display:none;"></video></form>
+      <div id="doubt-list" class="doubt-list"></div>
+    </div>
+
     <div id="notes-panel" class="panel-body" style="display:none;">
-      <textarea id="notes-area" class="notes-area" placeholder="Type session notes here — students see them live…"></textarea>
+      <div class="notes-source-bar"><input id="notes-drive-url" placeholder="Paste a Google Drive PDF link"><button id="btn-notes-drive" class="btn-ghost" type="button">Open Drive PDF</button></div><textarea id="notes-area" class="notes-area" placeholder="Type session notes here — students see them live…"></textarea><iframe id="notes-drive-frame" class="notes-drive-frame" title="Drive notes preview" style="display:none;"></iframe>
       <div id="notes-status" class="notes-status">Saved</div>
     </div>
   </aside>
@@ -131,9 +157,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="js/supabase-client.js"></script>
+<script src="js/supabase-client.js"></script><script src="js/fullscreen.js"></script>
 <script src="js/webrtc-signal.js"></script>
-<script src="js/side-panel.js"></script>
-<script src="js/studio.js"></script>
+<script src="js/side-panel.js"></script><script src="js/doubts.js"></script>
+<script src="js/studio.js"></script><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script><script src="js/phone-camera-studio.js"></script><script src="js/notes-sources.js"></script><script src="js/notifications.js"></script><script src="js/smartboard-call.js"></script>
 </body>
 </html>

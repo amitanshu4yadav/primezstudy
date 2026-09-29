@@ -2,23 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Create and manage PrimezStudy live classes.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Instructor Studio | PrimezStudy">
+<meta property="og:description" content="Create and manage PrimezStudy live classes.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/instructor.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Create and manage PrimezStudy live classes.","url":"https://primezstudy.com/"}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PrimezStudy — Instructor</title>
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700" rel="stylesheet">
+<script src="js/staff-guard.js"></script><link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand">
     <div class="brand-mark">
-      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="#FFB35A" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="#FFB35A"/></svg>
+      <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg>
     </div>
     PrimezStudy <span style="color:var(--text-muted); font-family:var(--font-mono); font-size:13px; font-weight:500; margin-left:6px;">/ instructor</span>
   </div>
   <div class="topbar-right">
+    <a href="admin.html" class="btn-ghost">Admin</a>
     <a href="dashboard.html" class="btn-ghost">← Classes</a>
   </div>
 </div>
@@ -27,7 +40,7 @@
   <div class="page-head">
     <div>
       <h1>Go live</h1>
-      <p>Create a class, then hit <b>Go live</b> to broadcast straight from your camera or screen — no external streaming server needed.</p>
+      <p>Create a class, then choose the best setup for your device: direct PrimezStudy Live on phone/laptop, or OBS Studio Virtual Camera on laptop for a board-style production.</p>
     </div>
   </div>
 
@@ -39,13 +52,16 @@
       <div class="field"><label for="c-desc">Description</label><input id="c-desc" placeholder="What this session covers"></div>
       <div class="field"><label for="c-time">Scheduled start</label><input id="c-time" type="datetime-local" required></div>
       <div class="field"><label for="c-duration">Duration (minutes)</label><input id="c-duration" type="number" value="60" min="5"></div>
-      <button class="btn-primary" type="submit">Create class</button>
+      <button class="btn-primary" type="submit">Create class</button><button id="obs-guide-top" class="btn-ghost" type="button" style="margin-left:8px;">OBS setup guide</button>
     </form>
     <div id="create-msg" class="form-msg"></div>
   </div>
 
   <div class="section-label">Your classes</div>
   <div id="manage-list"></div>
+
+  <div class="section-label">Batch management</div>
+  <div class="side-panel"><p class="panel-intro">Create free or paid learning cohorts. Published batches appear in the student catalog and can be joined through Razorpay test checkout.</p><div id="batch-manager"></div></div>
 </div>
 
 <template id="row-template">
@@ -59,15 +75,13 @@
       <button class="btn-ghost row-delete" type="button">Delete</button>
     </div>
 
-    <div style="display:flex; gap:10px;">
-      <a class="btn-primary row-studio" href="#" style="flex:1; text-align:center;">Open studio</a>
-      <button class="btn-ghost row-end" type="button" style="flex:1;">End class</button>
+    <div class="live-mode-row"><a class="btn-primary row-studio" href="#" style="flex:1; text-align:center;">PrimezStudy Live</a><a class="btn-ghost row-obs" href="#" style="flex:1; text-align:center;">OBS setup</a><button class="btn-ghost row-end" type="button" style="flex:1;">End class</button>
     </div>
   </div>
 </template>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-client.js"></script>
-<script src="js/instructor.js"></script>
+<script src="js/instructor.js"></script><script src="js/instructor-live-modes.js"></script><script src="js/batches.js"></script><script>initBatchManager();</script>
 </body>
 </html>

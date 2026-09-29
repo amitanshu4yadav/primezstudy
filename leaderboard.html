@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Track your PrimezStudy learning XP and see your progress on the student leaderboard.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5271DE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PrimezStudy">
+<meta property="og:title" content="Learning Leaderboard | PrimezStudy">
+<meta property="og:description" content="Track your PrimezStudy learning XP and see your progress on the student leaderboard.">
+<meta property="og:image" content="icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://primezstudy.com/leaderboard.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"PrimezStudy","description":"Track your PrimezStudy learning XP and see your progress on the student leaderboard.","url":"https://primezstudy.com/"}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimezStudy — Leaderboard</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/responsive.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13" r="4" fill="currentColor"/></svg></div>
+    PrimezStudy
+  </div>
+  <nav class="topbar-nav">
+    <a href="dashboard.html">Live classes</a>
+    <a href="lectures.html">Lectures</a>
+    <a href="leaderboard.html" class="nav-active">Leaderboard</a>
+  </nav>
+  <div class="topbar-right">
+    <a href="dashboard.html" class="btn-ghost">← Dashboard</a>
+  </div>
+</div>
+
+<div class="page-shell" style="max-width:720px;">
+  <div class="page-head">
+    <div>
+      <h1>Leaderboard</h1>
+      <p>Earn XP by watching lectures (2 XP per minute) and chatting in live classes (1 XP per message). Ranked by total XP.</p>
+    </div>
+  </div>
+
+  <div id="leaderboard-gate" class="gate-card" style="display:none;">
+    <div class="gate-icon">🔒</div>
+    <h3>Leaderboard locked</h3>
+    <p>Watch at least 1 minute of a lecture to unlock — that's 2 XP.</p>
+    <div class="gate-bar"><div id="gate-bar-fill" class="gate-bar-fill"></div></div>
+    <div id="gate-progress" class="gate-progress-text">0 / 2 XP</div>
+    <a href="lectures.html" class="btn-primary" style="margin-top:14px; display:inline-block;">Browse lectures</a>
+  </div>
+
+  <div id="leaderboard-list" class="leaderboard-list">
+    <div class="skeleton" style="height:56px;"></div>
+    <div class="skeleton" style="height:56px;"></div>
+    <div class="skeleton" style="height:56px;"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/profile-sync.js"></script>
+<script src="js/leaderboard.js"></script>
+</body>
+</html>
